@@ -1,8 +1,13 @@
 name: Monitor curso moto
 
 on:
+  # Horario en UTC (Campeche = UTC-6). Publican normalmente mar-jue en la tarde.
   schedule:
-    - cron: "*/5 * * * *"
+    # Ventana probable: martes a jueves 8:00-22:00 Campeche, cada 5 min
+    - cron: "*/5 14-23 * * 2-4"
+    - cron: "*/5 0-3 * * 3-5"
+    # Resto del tiempo: cada 30 min (por si publican otro dia o se libera un lugar)
+    - cron: "15,45 * * * *"
   workflow_dispatch:
     inputs:
       prueba:
